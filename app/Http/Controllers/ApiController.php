@@ -9,12 +9,13 @@ class ApiController extends Controller
 {
     public function image(Request $request)
     {
-        $image = $request->file;
+        $image = $request->image;
         $image_new_name = time() . $image->getClientOriginalName();
         $image->move('image', $image_new_name);
         $data = new Image;
         $data->image = $image_new_name;
         $data->number = $request->number;
+        $data->save();
         return response()->json($data);
     }
 
